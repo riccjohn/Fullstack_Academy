@@ -36,12 +36,44 @@ var systems = {
   }
 };
 
-const allSystemsGo = (obj) => {
-
-
-
+const allSystemsGo = (systems) => {
+  for (let key in systems) {
+    let value = systems[key];
+    if (typeof value === 'object') {
+      let subSystem = allSystemsGo(value);
+      if (!subSystem) return false;
+    }
+    if (!value) return false;
+  }
+  return true;
 }
 
 
 
 allSystemsGo(systems); // => false
+
+
+
+
+
+
+
+
+// OFFICIAL SOLUTION
+/*let allSystemsGo = (systems) => {
+  for (var key in systems) {
+    var value = systems[key];
+
+    if (typeof value === 'object') {
+
+      var subsystemsGo = allSystemsGo(value);
+      if (!subsystemsGo) {
+        return false;
+      }
+    }
+    if (!value) {
+      return false;
+    }
+  }
+  return true;
+}*/
